@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'apps.partner',
     'ckeditor',
     'ckeditor_uploader',
+    'modeltranslation',
 ]
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
@@ -132,7 +133,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ('en', 'English'),
+    ('ru', 'Russian'),
+)
 
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

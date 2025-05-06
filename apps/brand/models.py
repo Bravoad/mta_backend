@@ -4,14 +4,12 @@ from django.utils.text import slugify
 
 
 class Brand(models.Model):
-    name_en = models.CharField('full_name', max_length=255)
-    name_ru = models.CharField('Наименование', max_length=255)
+    name = models.CharField('Наименование', max_length=255, default='')
     slug = models.SlugField(unique=True, blank=True)
-    logo = models.ImageField('Портрет')
+    logo = models.ImageField('Логотип')
     picture = models.ImageField('Картинка')
-    brand_picture = models.ImageField('Картинка', blank=True, null=True)
-    short_description_en = models.TextField('short description', default='')
-    short_description_ru = models.TextField('Краткое описание', default='')
+    brand_picture = models.ImageField('Доп. Картинка', blank=True, null=True)
+    short_description = models.TextField('Краткое описание', default='')
     dynamic_description = RichTextUploadingField(
         'Динамическое описание',
         blank=True,
@@ -34,8 +32,8 @@ class Brand(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name_ru)  # или можно использовать name_en, в зависимости от предпочтений
+            self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name_ru
+        return self.name
